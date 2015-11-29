@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Películas</string>
+    <string name="title_pelicula_detail">Película</string>
+    <string name="buscar">Buscar</string>
+    <string name="buscarInmediatamente">Buscar mientras se escribe</string>
+    <string name="estadistica">Estadisticas</string>
+    <string name="especialidades">ESPECIALIDADES</string>
+    <string name="debilidades">DEBILIDADES</string>
+    <string name="ubicacion">MEJOR UBICACION</string>
+</resources>
