@@ -22,7 +22,7 @@
         </activity>
         <activity
             android:name=".PersonajeDetailActivity"
-            android:label="@string/title_pelicula_detail"
+            android:label="@string/title_personaje_detail"
             android:parentActivityName=".PersonajeListActivity"
             android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
