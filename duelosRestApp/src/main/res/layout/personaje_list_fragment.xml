@@ -27,12 +27,6 @@
 
     </LinearLayout>
 
-    <CheckBox
-        android:id="@+id/chkBuscarOnline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/buscarInmediatamente" />
-
     <ListView
         android:id="@android:id/list"
         android:layout_width="match_parent"

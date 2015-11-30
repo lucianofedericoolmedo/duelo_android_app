@@ -43,8 +43,16 @@ public class EstadisticasActivity extends AppCompatActivity {
         idPersonaje = getIntent().getIntExtra("idPersonaje",0);
         nombrePersonaje = getIntent().getStringExtra("nombrePersonaje");
         setTitle(nombrePersonaje);
-        obtenerEstadisticasPersonaje(idPersonaje);
+        //obtenerEstadisticasPersonaje(idPersonaje);
 
+    }
+
+
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        obtenerEstadisticasPersonaje(idPersonaje);
     }
 
 

@@ -19,7 +19,7 @@ public class DueloServiceInstance {
         // IMPORTANTE
         // Por un bug de retrofit 2.0, la BASE_URL debe tener una / al final
         // y la dirección del service debe comenzar sin /, como un path relativo
-        String BASE_URL = "http://192.168.1.68:9000/";
+        String BASE_URL = "http://192.168.1.69:9000/";
         //"http://10.12.6.10:9000/"
         //String BASE_URL = "http://10.12.6.10:9000/";
         Retrofit retrofit = new Retrofit.Builder()

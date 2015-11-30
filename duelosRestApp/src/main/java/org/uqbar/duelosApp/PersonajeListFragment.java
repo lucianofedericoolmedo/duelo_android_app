@@ -163,20 +163,7 @@ public class PersonajeListFragment extends ListFragment implements View.OnClickL
             setActivatedPosition(savedInstanceState.getInt(STATE_ACTIVATED_POSITION));
         }
 
-        // Comportamiento del checkbox que indica si se busca a medida que se escribe
-        final CheckBox chkBuscar = (CheckBox) view.findViewById(R.id.chkBuscarOnline);
-        final View myView = view;
-        chkBuscar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ImageButton btnBuscar = (ImageButton) myView.findViewById(R.id.btnBuscar);
-                if (chkBuscar.isChecked()) {
-                    btnBuscar.setVisibility(View.INVISIBLE);
-                } else {
-                    btnBuscar.setVisibility(View.VISIBLE);
-                }
-            }
-        });
+        // Comportamiento del checkbox que indica si se busca a medida que se escribe, volo
 
         // Comportamiento del título de búsqueda
         EditText tituloContiene = (EditText) view.findViewById(R.id.tituloContiene);
@@ -192,7 +179,7 @@ public class PersonajeListFragment extends ListFragment implements View.OnClickL
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (chkBuscar.isChecked() && editable.length() >= MIN_BUSQUEDA_PERSONAJES) {
+                if (editable.length() >= MIN_BUSQUEDA_PERSONAJES) {
                     buscarPeliculas();
                 }
             }
