@@ -6,6 +6,7 @@ import android.support.annotation.IdRes;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatCallback;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
@@ -37,7 +38,7 @@ public class EstadisticasActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_estadisticas);
+        setContentView(R.layout.activity_estadisticas_personaje);
 
         idPersonaje = getIntent().getIntExtra("idPersonaje",0);
         nombrePersonaje = getIntent().getStringExtra("nombrePersonaje");
@@ -71,7 +72,7 @@ public class EstadisticasActivity extends AppCompatActivity {
     }
 
     private void mostrarEstadisticas(@IdRes int id,Estadisticas estadistica){
-        TextView textBox = (TextView) findViewById(R.id.textView);
+        //TextView textBox = (TextView) findViewById(R.id.textView);
         ListView listView = (ListView) this.findViewById(id);
         List<Object> valoresDeEstadistica = new ArrayList<Object>();
         valoresDeEstadistica.add(estadistica.getJugadas());
@@ -86,6 +87,24 @@ public class EstadisticasActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
     }
 
+
+    /*
+
+    @Override
+    public void onSupportActionModeFinished(ActionMode mode) {
+        // TODO Auto-generated method stub
+        super.onSupportActionModeFinished(mode);
+    }
+
+    @Override
+    public void onSupportActionModeStarted(ActionMode mode) {
+        // TODO Auto-generated method stub
+        super.onSupportActionModeStarted(mode);
+    }
+
+
+
+     */
 
 
 }
