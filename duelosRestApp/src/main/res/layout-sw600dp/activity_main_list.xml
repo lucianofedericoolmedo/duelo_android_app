@@ -5,12 +5,6 @@
     android:divider="?android:attr/dividerHorizontal" android:orientation="horizontal"
     android:showDividers="middle" tools:context=".PersonajeListActivity">
 
-    <!--
-    This layout is a two-pane layout for the Peliculas
-    master/detail flow.
-    
-    -->
-
     <fragment android:id="@+id/personaje_list"
         android:name="org.uqbar.duelosApp.PersonajeListFragment" android:layout_width="0dp"
         android:layout_height="match_parent" android:layout_weight="1"
