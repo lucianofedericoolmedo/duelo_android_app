@@ -115,16 +115,22 @@ public class PersonajeDetailFragment extends Fragment {
 
     }
 
+    /**
+     * muestra caract y debilidades
+     */
     private void mostrarCaracteristicasPersonaje( Caracteristicas caracteristicas) {
-        mostrarCaracteristicas(caracteristicas.getEspecialidades());
-        mostrarCaracteristicas(caracteristicas.getDebilidades());
-        //mostrarCaracteristica(caracteristicas.getUbicacionIdeal());
+        mostrarCaracteristicas(R.id.especialidades_del_personaje,"ESPECIALIDADES", caracteristicas.getEspecialidades());
+        mostrarCaracteristicas(R.id.debilidades_del_personaje, "DEBILIDADES", caracteristicas.getDebilidades());
+        //mostrarCaracteristicas(R.id.ubicacion_ideal_del_personaje, caracteristicas.getUbicacionIdeal());
     }
 
-    private void mostrarCaracteristicas(List<String> caracteristicas) {
-        LinearLayout layout = (LinearLayout) this.getView().findViewById(R.id.caracteristicas_del_personaje);
+    private void mostrarCaracteristicas(@IdRes int id, String title, List<String> caracteristicas) {
+        LinearLayout layout = (LinearLayout) this.getView().findViewById(id);
 
         LayoutInflater inflater = LayoutInflater.from(getContext());
+        TextView tvt = new TextView(getContext());
+        tvt.setText(title);
+        layout.addView(tvt);
         for(String item : caracteristicas) {
             //View view =  inflater.inflate(R.layout.caracteristica_row, layout, false);
             TextView tv = new TextView(getContext());
@@ -132,13 +138,11 @@ public class PersonajeDetailFragment extends Fragment {
             layout.addView(tv);
         }
 
-//        LinearLayout layout = (LinearLayout) this.getView().findViewById(R.id.caracteristicas_del_personaje);
-//        LinearLayout layout = (LinearLayout) this.getView().findViewById(R.id.caracteristicas_del_personaje);
-
     }
 
     /*
     Esto deberia andar mal, creo que se pisarian los datos, porque es un TextView !
+    TODO SIN USO 01/12/15
      */
     private void mostrarCaracteristica(@IdRes int idImg ,@IdRes int id,String caracteristica){
         ((TextView) this.getView().findViewById(id)).setText(caracteristica);

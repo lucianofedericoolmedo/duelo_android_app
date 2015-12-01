@@ -11,9 +11,11 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import org.uqbar.duelo.adapter.EstadisticasAdapter;
 import org.uqbar.duelo.domain.Estadisticas;
 import org.uqbar.duelo.domain.Personaje;
 import org.uqbar.duelo.service.DueloService;
@@ -81,18 +83,11 @@ public class EstadisticasActivity extends AppCompatActivity {
 
     private void mostrarEstadisticas(@IdRes int id,Estadisticas estadistica){
         //TextView textBox = (TextView) findViewById(R.id.textView);
-        ListView listView = (ListView) this.findViewById(id);
-        List<Object> valoresDeEstadistica = new ArrayList<Object>();
-        valoresDeEstadistica.add(estadistica.getJugadas());
-        valoresDeEstadistica.add(estadistica.getGanadas());
-        valoresDeEstadistica.add(estadistica.getKills());
-        valoresDeEstadistica.add(estadistica.getDeads());
-        valoresDeEstadistica.add(estadistica.getAssists());
-        valoresDeEstadistica.add(estadistica.getMejorUbicacion());
-        valoresDeEstadistica.add(estadistica.getPuntaje());
-        ArrayAdapter<Object> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, valoresDeEstadistica);
-        listView.setAdapter(adapter);
+        GridView gridview = (GridView) this.findViewById(id);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, estadistica.estadisticas());
+        gridview.setAdapter(adapter);
     }
 
 

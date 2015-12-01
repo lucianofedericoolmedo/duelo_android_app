@@ -1,47 +1,54 @@
 package org.uqbar.duelo.domain;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by luciano on 28/11/15.
  */
 public class Estadisticas implements Serializable{
 
-    private int jugadas;
-    private int ganadas;
-    private int kills;
-    private int deads;
-    private int assists;
+    private String jugadas;
+    private String ganadas;
+    private String kills;
+    private String deads;
+    private String assists;
     private String mejorUbicacion;
     private String puntaje;
 
     public Estadisticas(int jugadas, int ganadas, int kills, int deads, int assists, String mejorUbicacion, String puntaje) {
-        this.jugadas = jugadas;
-        this.ganadas = ganadas;
-        this.kills = kills;
-        this.deads = deads;
-        this.assists = assists;
-        this.mejorUbicacion =mejorUbicacion;
+        this.jugadas = String.valueOf(jugadas);
+        this.ganadas =String.valueOf(ganadas);
+        this.kills = String.valueOf(kills);
+        this.deads = String.valueOf(deads);
+        this.assists = String.valueOf(assists);
+        this.mejorUbicacion = mejorUbicacion;
         this.puntaje = puntaje;
     }
 
-    public int getJugadas() {
+    public List<String> estadisticas(){
+        return Arrays.asList(new String[]{getJugadas(),getGanadas(),getKills(),getAssists(),getMejorUbicacion(),getPuntaje()});
+    }
+
+    public String getJugadas() {
         return this.jugadas;
     }
 
-    public int getGanadas() {
+    public String getGanadas() {
         return this.ganadas;
     }
 
-    public int getKills() {
+    public String getKills() {
         return this.kills;
     }
 
-    public int getDeads() {
+    public String getDeads() {
         return this.deads;
     }
 
-    public int getAssists() {
+    public String getAssists() {
         return this.assists;
     }
 
