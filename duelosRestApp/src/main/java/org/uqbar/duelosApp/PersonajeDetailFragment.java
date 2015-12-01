@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -115,22 +116,24 @@ public class PersonajeDetailFragment extends Fragment {
     }
 
     private void mostrarCaracteristicasPersonaje( Caracteristicas caracteristicas) {
-
-
-        mostrarCaracteristicas(R.id.especialidades_detail_text,R.id.especialidades_detail,caracteristicas.getEspecialidades());
-
-        mostrarCaracteristicas(R.id.debilidades_detail,R.id.debilidades_detail,caracteristicas.getDebilidades());
-
-        mostrarCaracteristica(R.id.ubicacion_detail, R.id.ubicacion_detail, caracteristicas.getUbicacionIdeal());
+        mostrarCaracteristicas(caracteristicas.getEspecialidades());
+        mostrarCaracteristicas(caracteristicas.getDebilidades());
+        //mostrarCaracteristica(caracteristicas.getUbicacionIdeal());
     }
 
-    private void mostrarCaracteristicas(@IdRes int idImg ,@IdRes int id,List<String> caracteristicas){
-        //ImageView imageView = (ImageView) getActivity().findViewById(idImg);
-        //mageView.setImageDrawable(getActivity().getResources().getDrawable());
-        ListView listView = (ListView) this.getView().findViewById(id);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
-                android.R.layout.simple_list_item_1, caracteristicas);
-        listView.setAdapter(adapter);
+    private void mostrarCaracteristicas(List<String> caracteristicas) {
+        LinearLayout layout = (LinearLayout) this.getView().findViewById(R.id.caracteristicas_del_personaje);
+
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+        for(String item : caracteristicas) {
+            TextView view = (TextView) inflater.inflate(R.layout.caracteristica_row, layout, false);
+            view.setText(item);
+            layout.addView(view);
+        }
+
+//        LinearLayout layout = (LinearLayout) this.getView().findViewById(R.id.caracteristicas_del_personaje);
+//        LinearLayout layout = (LinearLayout) this.getView().findViewById(R.id.caracteristicas_del_personaje);
+
     }
 
     /*

@@ -19,8 +19,39 @@
         android:layout_width="match_parent"
         android:layout_height="fill_parent" />
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/caracteristicas_del_personaje"
+            >
+
+
+
+
+
+
+
+
+            
+
+        </LinearLayout>
+
+
+
+
+
+
+
+
+    </ScrollView>
+
+
+
+<!--    <TextView
         android:id="@+id/especialidades_detail_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -61,7 +92,7 @@
         style="?android:attr/textAppearanceLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="16dp"/>
+        android:padding="16dp"/>-->
 
 
 </LinearLayout>
