@@ -126,9 +126,10 @@ public class PersonajeDetailFragment extends Fragment {
 
         LayoutInflater inflater = LayoutInflater.from(getContext());
         for(String item : caracteristicas) {
-            TextView view = (TextView) inflater.inflate(R.layout.caracteristica_row, layout, false);
-            view.setText(item);
-            layout.addView(view);
+            //View view =  inflater.inflate(R.layout.caracteristica_row, layout, false);
+            TextView tv = new TextView(getContext());
+            tv.setText(item);
+            layout.addView(tv);
         }
 
 //        LinearLayout layout = (LinearLayout) this.getView().findViewById(R.id.caracteristicas_del_personaje);

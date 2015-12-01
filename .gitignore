@@ -23,6 +23,19 @@ gen/
 #Android Studio
 *.iml
 .idea
+.idea/
+.gradle/
 
 #NDK
 obj/
+
+# y esto?
+.gradle/2.4/taskArtifacts/cache.properties.lock
+.gradle/2.4/taskArtifacts/fileHashes.bin
+.gradle/2.4/taskArtifacts/fileSnapshots.bin
+.gradle/2.4/taskArtifacts/outputFileStates.bin
+.gradle/2.4/taskArtifacts/taskArtifacts.bin
+.idea/gradle.xml
+.idea/misc.xml
+.idea/workspace.xml
+loca.properties
