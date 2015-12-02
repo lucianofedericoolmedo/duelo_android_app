@@ -31,7 +31,8 @@ public class Estadisticas implements Serializable{
     }
 
     public List<DatoDeEstadisticas> estadisticas(){
-        return Arrays.asList(new DatoDeEstadisticas[]{getJugadas(),getGanadas(),getKills(),getAssists(),getMejorUbicacion(),getPuntaje()});
+        return Arrays.asList(new DatoDeEstadisticas[]{
+                getJugadas(),getGanadas(),getKills(),getAssists(),getMejorUbicacion(),getPuntaje()});
     }
 
     public DatoDeEstadisticas getJugadas() {
