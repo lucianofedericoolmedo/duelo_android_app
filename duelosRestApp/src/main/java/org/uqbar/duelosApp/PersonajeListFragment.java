@@ -108,9 +108,7 @@ public class PersonajeListFragment extends ListFragment implements View.OnClickL
             @Override
             public void onResponse(Response<List<Personaje>> response, Retrofit retrofit) {
                 personajes = response.body();
-                setListAdapter(new PersonajeAdapter(
-                        getActivity(),
-                        personajes));
+                adaptar_lista_de_personajes();
             }
 
             @Override
@@ -121,42 +119,22 @@ public class PersonajeListFragment extends ListFragment implements View.OnClickL
         });
     }
 
-/*    private void buscarPersonajeCuyoNombreCoincidaConTextoIngresado() {
-        EditText campoBusqueda = (EditText) this.getView().findViewById(R.id.tituloContiene);
-        String titulo = campoBusqueda.getText().toString();
-
-        Call<List<Personaje>> peliculaCall = dueloService.buscarPersonajes(titulo);
-
-        peliculaCall.enqueue(new Callback<List<Personaje>>() {
-            @Override
-            public void onResponse(Response<List<Personaje>> response, Retrofit retrofit) {
-                List<Personaje> personajes = new ArrayList<Personaje>();
-                if (!(response.body() == null)) {
-                    personajes.addAll(response.body());
-                    setListAdapter(new PersonajeAdapter(
-                            getActivity(),
-                            personajes));
-                }
-            }
-
-            @Override
-            public void onFailure(Throwable t) {
-                t.printStackTrace();
-                Log.e("DuelosApp", t.getMessage());
-            }
-        });
-    }*/
+    private void adaptar_lista_de_personajes(){
+        setListAdapter(new PersonajeAdapter(
+                getActivity(),
+                personajes));
+    }
 
     public void buscarPersonajeCuyoNombreCoincidaConTextoIngresado(){
 
         EditText campoBusqueda = (EditText) this.getView().findViewById(R.id.tituloContiene);
         String indice = campoBusqueda.getText().toString().toLowerCase();
-
+        List<Personaje> similares =  similares_a_texto_ingresado(indice);
         setListAdapter(new ArrayAdapter<Personaje>(
                 getActivity(),
                 android.R.layout.simple_list_item_activated_1,
-                android.R.id.text1,
-                similares_a_texto_ingresado(indice)));
+                android.R.id.text1,similares
+               ));
     }
 
 
@@ -180,40 +158,6 @@ public class PersonajeListFragment extends ListFragment implements View.OnClickL
         super.onActivityCreated(savedInstanceState);
     }
 
-/*    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        // Restore the previously serialized activated item position.
-        if (savedInstanceState != null
-                && savedInstanceState.containsKey(STATE_ACTIVATED_POSITION)) {
-            setActivatedPosition(savedInstanceState.getInt(STATE_ACTIVATED_POSITION));
-        }
-
-        // Comportamiento del checkbox que indica si se busca a medida que se escribe, volo
-
-        // Comportamiento del título de búsqueda
-        EditText tituloContiene = (EditText) view.findViewById(R.id.tituloContiene);
-        tituloContiene.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                if (editable.length() >= MIN_BUSQUEDA_PERSONAJES) {
-                    buscarPersonajeCuyoNombreCoincidaConTextoIngresado();
-                }
-            }
-        });
-
-        ((ImageButton) view.findViewById(R.id.btnBuscar)).setOnClickListener(this);
-    }*/
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -241,6 +185,9 @@ public class PersonajeListFragment extends ListFragment implements View.OnClickL
             public void afterTextChanged(Editable editable) {
                 if (editable.length() >= MIN_BUSQUEDA_PERSONAJES) {
                     buscarPersonajeCuyoNombreCoincidaConTextoIngresado();
+                }
+                else{
+                    adaptar_lista_de_personajes();
                 }
             }
         });
