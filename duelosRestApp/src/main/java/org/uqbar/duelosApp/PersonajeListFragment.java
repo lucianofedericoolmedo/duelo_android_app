@@ -10,9 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
-import android.widget.CheckBox;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -58,7 +57,7 @@ public class PersonajeListFragment extends ListFragment implements View.OnClickL
      * The current activated item position. Only used on tablets.
      */
     private int mActivatedPosition = ListView.INVALID_POSITION;
-
+    private List<Personaje> personajes;
     private DueloService dueloService;
 
     /**
@@ -108,10 +107,10 @@ public class PersonajeListFragment extends ListFragment implements View.OnClickL
         peliculaCall.enqueue(new Callback<List<Personaje>>() {
             @Override
             public void onResponse(Response<List<Personaje>> response, Retrofit retrofit) {
-                List<Personaje> personajes = response.body();
-                    setListAdapter(new PersonajeAdapter(
-                            getActivity(),
-                            personajes));
+                personajes = response.body();
+                setListAdapter(new PersonajeAdapter(
+                        getActivity(),
+                        personajes));
             }
 
             @Override
@@ -122,38 +121,66 @@ public class PersonajeListFragment extends ListFragment implements View.OnClickL
         });
     }
 
-    private void buscarPeliculas() {
+/*    private void buscarPersonajeCuyoNombreCoincidaConTextoIngresado() {
         EditText campoBusqueda = (EditText) this.getView().findViewById(R.id.tituloContiene);
         String titulo = campoBusqueda.getText().toString();
 
         Call<List<Personaje>> peliculaCall = dueloService.buscarPersonajes(titulo);
 
         peliculaCall.enqueue(new Callback<List<Personaje>>() {
-             @Override
-             public void onResponse(Response<List<Personaje>> response, Retrofit retrofit) {
-                 List<Personaje> personajes = new ArrayList<Personaje>();
-                 if(!(response.body() == null)){
-                     personajes.addAll( response.body());
-                     setListAdapter(new PersonajeAdapter(
-                             getActivity(),
-                             personajes));
-                 }
-             }
+            @Override
+            public void onResponse(Response<List<Personaje>> response, Retrofit retrofit) {
+                List<Personaje> personajes = new ArrayList<Personaje>();
+                if (!(response.body() == null)) {
+                    personajes.addAll(response.body());
+                    setListAdapter(new PersonajeAdapter(
+                            getActivity(),
+                            personajes));
+                }
+            }
 
-             @Override
-             public void onFailure(Throwable t) {
-                 t.printStackTrace();
-                 Log.e("DuelosApp", t.getMessage());
-             }
-         });
+            @Override
+            public void onFailure(Throwable t) {
+                t.printStackTrace();
+                Log.e("DuelosApp", t.getMessage());
+            }
+        });
+    }*/
+
+    public void buscarPersonajeCuyoNombreCoincidaConTextoIngresado(){
+
+        EditText campoBusqueda = (EditText) this.getView().findViewById(R.id.tituloContiene);
+        String indice = campoBusqueda.getText().toString().toLowerCase();
+
+        setListAdapter(new ArrayAdapter<Personaje>(
+                getActivity(),
+                android.R.layout.simple_list_item_activated_1,
+                android.R.id.text1,
+                similares_a_texto_ingresado(indice)));
     }
+
+
+    private List<Personaje> similares_a_texto_ingresado(String indice){
+        List<Personaje> simlares_a_ingresado= new ArrayList<>();
+
+        for (Personaje personaje : personajes) {
+
+            if (personaje.getNombre().toLowerCase().startsWith(indice))
+                simlares_a_ingresado.add(personaje);
+        }
+
+        return simlares_a_ingresado;
+    }
+
+
+
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
     }
 
-    @Override
+/*    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
@@ -180,13 +207,47 @@ public class PersonajeListFragment extends ListFragment implements View.OnClickL
             @Override
             public void afterTextChanged(Editable editable) {
                 if (editable.length() >= MIN_BUSQUEDA_PERSONAJES) {
-                    buscarPeliculas();
+                    buscarPersonajeCuyoNombreCoincidaConTextoIngresado();
                 }
             }
         });
 
         ((ImageButton) view.findViewById(R.id.btnBuscar)).setOnClickListener(this);
+    }*/
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Restore the previously serialized activated item position.
+        if (savedInstanceState != null
+                && savedInstanceState.containsKey(STATE_ACTIVATED_POSITION)) {
+            setActivatedPosition(savedInstanceState.getInt(STATE_ACTIVATED_POSITION));
+        }
+
+        // Comportamiento del título de búsqueda
+        EditText tituloContiene = (EditText) this.getView().findViewById(R.id.tituloContiene);
+        tituloContiene.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (editable.length() >= MIN_BUSQUEDA_PERSONAJES) {
+                    buscarPersonajeCuyoNombreCoincidaConTextoIngresado();
+                }
+            }
+        });
     }
+
+
+
 
     @Override
     public void onAttach(Activity activity) {
@@ -258,7 +319,7 @@ public class PersonajeListFragment extends ListFragment implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        buscarPeliculas();
+        buscarPersonajeCuyoNombreCoincidaConTextoIngresado();
     }
 
 }
