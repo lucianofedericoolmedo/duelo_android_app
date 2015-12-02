@@ -121,7 +121,7 @@ public class PersonajeDetailFragment extends Fragment {
     private void mostrarCaracteristicasPersonaje( Caracteristicas caracteristicas) {
         mostrarCaracteristicas(R.id.especialidades_del_personaje,"ESPECIALIDADES", caracteristicas.getEspecialidades());
         mostrarCaracteristicas(R.id.debilidades_del_personaje, "DEBILIDADES", caracteristicas.getDebilidades());
-        //mostrarCaracteristicas(R.id.ubicacion_ideal_del_personaje, caracteristicas.getUbicacionIdeal());
+        mostrarCaracteristicas(R.id.ubicacion_ideal_del_personaje, "UBICACION IDEAL", caracteristicas.getUbicacionIdeal());
     }
 
     private void mostrarCaracteristicas(@IdRes int id, String title, List<String> caracteristicas) {
@@ -144,8 +144,16 @@ public class PersonajeDetailFragment extends Fragment {
     Esto deberia andar mal, creo que se pisarian los datos, porque es un TextView !
     TODO SIN USO 01/12/15
      */
-    private void mostrarCaracteristica(@IdRes int idImg ,@IdRes int id,String caracteristica){
-        ((TextView) this.getView().findViewById(id)).setText(caracteristica);
+    private void mostrarCaracteristicas(@IdRes int id,String title,String caracteristica){
+        LinearLayout layout = (LinearLayout) this.getView().findViewById(id);
+
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+        TextView tvt = new TextView(getContext());
+        tvt.setText(title);
+        layout.addView(tvt);
+        TextView text = new TextView(getContext());
+        text.setText(caracteristica);
+        layout.addView(text);
     }
 
 
