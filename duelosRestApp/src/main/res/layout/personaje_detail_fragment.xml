@@ -5,16 +5,6 @@
     android:orientation="vertical"
     tools:context=".PersonajeDetailFragment">
 
-    <!--TextView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/personaje_nombre"
-        style="?android:attr/textAppearanceLarge"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fontFamily="typeface:BOLD"
-        android:padding="16dp"
-        android:textIsSelectable="true"
-        tools:context=".PersonajeDetailFragment" /-->
 
     <ImageView
         android:id="@+id/imgPersonaje"

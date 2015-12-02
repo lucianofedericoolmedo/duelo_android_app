@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import org.uqbar.duelo.adapter.EstadisticasAdapter;
+import org.uqbar.duelo.domain.DatoDeEstadisticas;
 import org.uqbar.duelo.domain.Estadisticas;
 import org.uqbar.duelo.domain.Personaje;
 import org.uqbar.duelo.service.DueloService;
@@ -65,7 +66,8 @@ public class EstadisticasActivity extends AppCompatActivity {
         personajeCall.enqueue(new Callback<Estadisticas>() {
             @Override
             public void onResponse(Response<Estadisticas> response, Retrofit retrofit) {
-                mostrarCaracteristicasPersonaje(response.body());
+                Estadisticas estadisticas = response.body();
+                mostrarCaracteristicasPersonaje(estadisticas);
             }
 
             @Override
@@ -83,11 +85,11 @@ public class EstadisticasActivity extends AppCompatActivity {
 
     private void mostrarEstadisticas(@IdRes int id,Estadisticas estadistica){
         //TextView textBox = (TextView) findViewById(R.id.textView);
-        GridView gridview = (GridView) this.findViewById(id);
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+        ListView gridview = (ListView) this.findViewById(id);
+        gridview.setAdapter(new EstadisticasAdapter(this,estadistica.estadisticas()));
+        /*ArrayAdapter<DatoDeEstadisticas> adapter = new ArrayAdapter<DatoDeEstadisticas>(this,
                 android.R.layout.simple_list_item_1, estadistica.estadisticas());
-        gridview.setAdapter(adapter);
+        gridview.setAdapter(adapter);*/
     }
 
 

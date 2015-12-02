@@ -12,9 +12,6 @@ import org.uqbar.duelosApp.R;
 
 import java.util.List;
 
-/**
- * Created by fernando on 27/10/15.
- */
 public class PersonajeAdapter extends ArrayAdapter<Personaje> {
 
     public PersonajeAdapter(Context context, List<Personaje> personajes) {
