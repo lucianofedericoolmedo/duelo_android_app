@@ -1,6 +1,7 @@
 package org.uqbar.duelo.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,16 +11,16 @@ public class Caracteristicas implements Serializable{
 
     private List<String> especialidades;
     private List<String> debilidades;
-    private String ubicacionIdeal;
+    private List<String> ubicacionIdeal = new ArrayList<>();
 
     private Caracteristicas(List<String> especialidades,List<String> debilidades,String ubicacionIdeal) {
         this.especialidades = especialidades;
         this.debilidades = debilidades;
-        this.ubicacionIdeal = ubicacionIdeal;
+        this.ubicacionIdeal.add(ubicacionIdeal);
 
     }
 
-    public String getUbicacionIdeal() {
+    public List<String> getUbicacionIdeal() {
         return this.ubicacionIdeal;
     }
 

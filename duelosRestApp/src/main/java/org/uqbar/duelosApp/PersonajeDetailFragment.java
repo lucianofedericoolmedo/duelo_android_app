@@ -20,6 +20,7 @@ import org.uqbar.duelo.domain.Personaje;
 import org.uqbar.duelo.service.DueloService;
 import org.uqbar.duelo.service.DueloServiceInstance;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit.Call;
@@ -62,13 +63,7 @@ public class PersonajeDetailFragment extends Fragment {
             // to load content from a content provider.
             personaje = (Personaje) getArguments().get(ARG_ITEM_ID);
             obtenerCaracteristicasPersonaje(personaje);
-           /* Activity activity = this.getActivity();
-            CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
-            if (appBarLayout != null) {
-                appBarLayout.setTitle(personaje.getNombre());
-            } else {
-                activity.setTitle(personaje.getNombre());
-            }*/
+
         }
     }
 
@@ -88,7 +83,6 @@ public class PersonajeDetailFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
-//        super.onActivityCreated(savedInstanceState);
         Activity activity = this.getActivity();
         ((PersonajeDetailActivity) activity).setToolBarAndButton(personaje);
     }
@@ -121,39 +115,19 @@ public class PersonajeDetailFragment extends Fragment {
     private void mostrarCaracteristicasPersonaje( Caracteristicas caracteristicas) {
         mostrarCaracteristicas(R.id.especialidades_del_personaje,"ESPECIALIDADES", caracteristicas.getEspecialidades());
         mostrarCaracteristicas(R.id.debilidades_del_personaje, "DEBILIDADES", caracteristicas.getDebilidades());
-        mostrarCaracteristicas(R.id.ubicacion_ideal_del_personaje, "UBICACION IDEAL", caracteristicas.getUbicacionIdeal());
+        mostrarCaracteristicas(R.id.ubicacion_ideal_del_personaje, "UBICACION IDEAL",caracteristicas.getUbicacionIdeal());
     }
 
     private void mostrarCaracteristicas(@IdRes int id, String title, List<String> caracteristicas) {
         LinearLayout layout = (LinearLayout) this.getView().findViewById(id);
-
-        LayoutInflater inflater = LayoutInflater.from(getContext());
         TextView tvt = new TextView(getContext());
         tvt.setText(title);
         layout.addView(tvt);
         for(String item : caracteristicas) {
-            //View view =  inflater.inflate(R.layout.caracteristica_row, layout, false);
             TextView tv = new TextView(getContext());
             tv.setText(item);
             layout.addView(tv);
         }
-
-    }
-
-    /*
-    Esto deberia andar mal, creo que se pisarian los datos, porque es un TextView !
-    TODO SIN USO 01/12/15
-     */
-    private void mostrarCaracteristicas(@IdRes int id,String title,String caracteristica){
-        LinearLayout layout = (LinearLayout) this.getView().findViewById(id);
-
-        LayoutInflater inflater = LayoutInflater.from(getContext());
-        TextView tvt = new TextView(getContext());
-        tvt.setText(title);
-        layout.addView(tvt);
-        TextView text = new TextView(getContext());
-        text.setText(caracteristica);
-        layout.addView(text);
     }
 
 

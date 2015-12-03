@@ -1,7 +1,7 @@
 package org.uqbar.duelo.service;
 
 import org.uqbar.duelo.domain.Caracteristicas;
-import org.uqbar.duelo.domain.Estadisticas;
+import org.uqbar.duelo.domain.DatosDeEstadisticas;
 import org.uqbar.duelo.domain.Personaje;
 
 import java.util.List;
@@ -23,10 +23,7 @@ public interface DueloService {
     public Call<Caracteristicas> getCaracteristicasPersonaje(@Path("personajeId") String personajeId);
 
     @GET("/estadisticas/1/{personajeId}")
-    public Call<Estadisticas> getEstadisticasPersonaje(@Path("personajeId") String personajeId);
-
-    @GET("/personajesBuscados/{nombrePersonaje}")
-    public Call<List<Personaje>> buscarPersonajes(@Path("nombrePersonaje") String nombrePersonaje);
+    public Call<List<DatosDeEstadisticas>> getEstadisticasPersonaje(@Path("personajeId") String personajeId);
 }
 
 

@@ -1,30 +1,15 @@
 package org.uqbar.duelosApp;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.AppCompatCallback;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.GridView;
 import android.widget.ListView;
-import android.widget.TextView;
-
 import org.uqbar.duelo.adapter.EstadisticasAdapter;
-import org.uqbar.duelo.domain.DatoDeEstadisticas;
-import org.uqbar.duelo.domain.Estadisticas;
-import org.uqbar.duelo.domain.Personaje;
+import org.uqbar.duelo.domain.DatosDeEstadisticas;
 import org.uqbar.duelo.service.DueloService;
 import org.uqbar.duelo.service.DueloServiceInstance;
-
-import java.util.ArrayList;
 import java.util.List;
-
 import retrofit.Call;
 import retrofit.Callback;
 import retrofit.Response;
@@ -46,11 +31,7 @@ public class EstadisticasActivity extends AppCompatActivity {
         idPersonaje = getIntent().getIntExtra("idPersonaje",0);
         nombrePersonaje = getIntent().getStringExtra("nombrePersonaje");
         setTitle(nombrePersonaje);
-        //obtenerEstadisticasPersonaje(idPersonaje);
-
     }
-
-
 
     @Override
     public void onStart(){
@@ -61,14 +42,15 @@ public class EstadisticasActivity extends AppCompatActivity {
 
     private void obtenerEstadisticasPersonaje(int personajeID) {
         DueloService dueloService = DueloServiceInstance.createDueloService();
-        Call<Estadisticas> personajeCall = dueloService.getEstadisticasPersonaje(String.valueOf(personajeID));
+        Call<List<DatosDeEstadisticas>> personajeCall = dueloService.getEstadisticasPersonaje(String.valueOf(personajeID));
 
-        personajeCall.enqueue(new Callback<Estadisticas>() {
+        personajeCall.enqueue(new Callback<List<DatosDeEstadisticas>>() {
             @Override
-            public void onResponse(Response<Estadisticas> response, Retrofit retrofit) {
-                Estadisticas estadisticas = response.body();
+            public void onResponse(Response<List<DatosDeEstadisticas>> response, Retrofit retrofit) {
+                List<DatosDeEstadisticas> estadisticas = response.body();
                 mostrarCaracteristicasPersonaje(estadisticas);
             }
+
 
             @Override
             public void onFailure(Throwable t) {
@@ -79,37 +61,17 @@ public class EstadisticasActivity extends AppCompatActivity {
 
     }
 
-    private void mostrarCaracteristicasPersonaje( Estadisticas estadistica) {
-        mostrarEstadisticas(R.id.estadisticas_detail, estadistica);
+    private void mostrarCaracteristicasPersonaje( List<DatosDeEstadisticas> estadisticas) {
+        mostrarEstadisticas(R.id.estadisticas_detail, estadisticas);
     }
 
-    private void mostrarEstadisticas(@IdRes int id,Estadisticas estadistica){
-        //TextView textBox = (TextView) findViewById(R.id.textView);
+    private void mostrarEstadisticas(@IdRes int id,List<DatosDeEstadisticas> datos){
+
         ListView gridview = (ListView) this.findViewById(id);
-        gridview.setAdapter(new EstadisticasAdapter(this,estadistica.estadisticas()));
-        /*ArrayAdapter<DatoDeEstadisticas> adapter = new ArrayAdapter<DatoDeEstadisticas>(this,
-                android.R.layout.simple_list_item_1, estadistica.estadisticas());
-        gridview.setAdapter(adapter);*/
+        gridview.setAdapter(new EstadisticasAdapter(this,datos));
+
     }
 
-
-    /*
-
-    @Override
-    public void onSupportActionModeFinished(ActionMode mode) {
-        // TODO Auto-generated method stub
-        super.onSupportActionModeFinished(mode);
-    }
-
-    @Override
-    public void onSupportActionModeStarted(ActionMode mode) {
-        // TODO Auto-generated method stub
-        super.onSupportActionModeStarted(mode);
-    }
-
-
-
-     */
 
 
 }

@@ -37,7 +37,7 @@ import retrofit.Retrofit;
  * Activities containing this fragment MUST implement the {@link Callbacks}
  * interface.
  */
-public class PersonajeListFragment extends ListFragment implements View.OnClickListener {
+public class PersonajeListFragment extends ListFragment {
 
     public static int MIN_BUSQUEDA_PERSONAJES = 2;
 
@@ -113,8 +113,7 @@ public class PersonajeListFragment extends ListFragment implements View.OnClickL
 
             @Override
             public void onFailure(Throwable t) {
-                t.printStackTrace();
-                Log.e("DuelosApp", t.getMessage());
+
             }
         });
     }
@@ -262,11 +261,6 @@ public class PersonajeListFragment extends ListFragment implements View.OnClickL
         }
 
         mActivatedPosition = position;
-    }
-
-    @Override
-    public void onClick(View v) {
-        buscarPersonajeCuyoNombreCoincidaConTextoIngresado();
     }
 
 }

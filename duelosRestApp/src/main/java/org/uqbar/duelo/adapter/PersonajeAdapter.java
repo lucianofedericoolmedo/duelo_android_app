@@ -28,7 +28,7 @@ public class PersonajeAdapter extends ArrayAdapter<Personaje> {
         LayoutInflater inflater = (LayoutInflater) getContext()
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.personaje_row, parent, false);
-        final Personaje personaje = getItem(position);
+        Personaje personaje = getItem(position);
 
         TextView tvPersonaje = (TextView) rowView.findViewById(R.id.lblPersonaje);
         tvPersonaje.setText(personaje.toString());
